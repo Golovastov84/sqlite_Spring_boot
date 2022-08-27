@@ -1,0 +1,11 @@
+настройка SQLite и Spring Boot
+https://fullstackdeveloper.guru/2020/05/01/how-to-integrate-sqlite-database-with-spring-boot/
+
+пример создания таблиц через файлы
+https://www.baeldung.com/spring-boot-data-sql-and-schema-sql
+
+важно для работы data.sql
+Try adding this line in application.properties:
+spring.sql.init.mode=always
+
+Or for Spring Boot before 2.5:
