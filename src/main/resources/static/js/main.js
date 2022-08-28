@@ -11,7 +11,7 @@ $(function(){
 
     const appendTask = function(data){
         var taskCode = '<a href="#" class="task-link" data-id="' +
-            data.id + '">' + data.header + '</a><br>';
+            data.id + '">' + data.name + '</a><br>';
         $('#task-list')
             .append('<div>' + taskCode + '</div>');
     };

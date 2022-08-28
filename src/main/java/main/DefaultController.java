@@ -26,8 +26,9 @@ public class DefaultController {
         for(Person person : personIterable){
             persons.add(person);
         }
-        /*model.addAttribute("persons", persons);
-        model.addAttribute("personsCount", persons.size());*/
+        System.out.println("person size" + persons.size());
+        model.addAttribute("persons", persons);
+        model.addAttribute("personsCount", persons.size());
         model.addAttribute("someParameter", someParameter);
         return "index";
     }
