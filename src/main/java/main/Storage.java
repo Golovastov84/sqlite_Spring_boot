@@ -1,5 +1,6 @@
-package com.springboot.sqlite;
+package main;
 
+import main.model.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,28 +24,28 @@ public class Storage {
         return id;
     }
 
-    public static int setTask(Task task) {
-        int IdTask = task.getId();
-        persons.put(IdTask, task);
-        return IdTask;
+    public static int setPerson(Person person) {
+        int IdPerson = person.getId();
+        persons.put(IdPerson, person);
+        return IdPerson;
     }
 
-    public static Task getTask(int taskId) {
-        if (persons.containsKey(taskId)) {
-            return persons.get(taskId);
+    public static Person getPerson(int personId) {
+        if (persons.containsKey(personId)) {
+            return persons.get(personId);
         }
         return null;
     }
 
-    public static int dellTask(int taskId) {
-        if (persons.containsKey(taskId)) {
-            persons.remove(taskId);
-            return taskId;
+    public static int dellPerson(int personId) {
+        if (persons.containsKey(personId)) {
+            persons.remove(personId);
+            return personId;
         }
         return 0;
     }
 
-    public static int dellAllTask() {
+    public static int dellAllPerson() {
         persons.clear();
         currentId = 1;
         return 0;

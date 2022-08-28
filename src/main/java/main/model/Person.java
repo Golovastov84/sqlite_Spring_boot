@@ -1,4 +1,4 @@
-package com.springboot.sqlite;
+package main.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,11 +10,14 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private int id;
 
     private String name;
 
     private String message;
+
+    public Person() {
+    }
 
     /**
      * @return the id
@@ -26,7 +29,7 @@ public class Person {
     /**
      * @param id the id to set
      */
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

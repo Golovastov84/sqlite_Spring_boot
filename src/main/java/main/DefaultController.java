@@ -1,7 +1,7 @@
-package com.springboot.sqlite;
+package main;
 
-import main.model.Task;
-import main.model.TaskRepository;
+import main.model.Person;
+import main.model.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,20 +14,20 @@ import java.util.ArrayList;
 public class DefaultController {
 
     @Autowired
-    TaskRepository taskRepository;
+    PersonRepository personRepository;
 
     @Value("${someParameter}")
     private Integer someParameter;
 
     @RequestMapping("/")
     public String index(Model model){
-        Iterable<Task> taskIterable = taskRepository.findAll();
-        ArrayList<Task> tasks = new ArrayList<>();
-        for(Task task : taskIterable){
-            tasks.add(task);
+        Iterable<Person> personIterable = personRepository.findAll();
+        ArrayList<Person> persons = new ArrayList<>();
+        for(Person person : personIterable){
+            persons.add(person);
         }
-        model.addAttribute("tasks", tasks);
-        model.addAttribute("tasksCount", tasks.size());
+        /*model.addAttribute("persons", persons);
+        model.addAttribute("personsCount", persons.size());*/
         model.addAttribute("someParameter", someParameter);
         return "index";
     }
