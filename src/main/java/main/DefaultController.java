@@ -1,7 +1,7 @@
 package main;
 
-import main.model.Person;
-import main.model.PersonRepository;
+import main.model.People;
+import main.model.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,21 +14,20 @@ import java.util.ArrayList;
 public class DefaultController {
 
     @Autowired
-    PersonRepository personRepository;
+    PeopleRepository peopleRepository;
 
     @Value("${someParameter}")
     private Integer someParameter;
 
     @RequestMapping("/")
     public String index(Model model){
-        Iterable<Person> personIterable = personRepository.findAll();
-        ArrayList<Person> persons = new ArrayList<>();
-        for(Person person : personIterable){
-            persons.add(person);
+        Iterable<People> peopleIterable = peopleRepository.findAll();
+        ArrayList<People> peoples = new ArrayList<>();
+        for(People people : peopleIterable){
+            peoples.add(people);
         }
-        System.out.println("person size" + persons.size());
-        model.addAttribute("persons", persons);
-        model.addAttribute("personsCount", persons.size());
+        model.addAttribute("peoples", peoples);
+        model.addAttribute("peoplesCount", peoples.size());
         model.addAttribute("someParameter", someParameter);
         return "index";
     }

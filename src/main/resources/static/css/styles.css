@@ -2,7 +2,7 @@
     font-family: Arial;
 }
 
-#task-form, #task-put-form {
+#people-form, #people-put-form {
     display: none;
     align-items: center;
     justify-content: center;
@@ -17,22 +17,22 @@
 
 
 
-#task-form form, #task-put-form form {
+#people-form form, #people-put-form form {
     background-color: white;
     border: 1px solid #333;
     width: 300px;
     padding: 20px;
 }
 
-#task-form h2 {
+#people-form h2 {
     margin-top: 0;
 }
 
-#task-form label{
+#people-form label{
     display: block;
 }
 
-#task-form form > * {
+#people-form form > * {
     margin-bottom: 5px;
 }
 

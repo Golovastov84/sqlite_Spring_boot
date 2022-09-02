@@ -8,34 +8,27 @@
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-    <div id="task-form">
+    <div id="people-form">
         <form>
-            <h2>Добавление дела</h2>
-            <label>Название дела</label>
-            <input type="text" name="header" value="">
-            <label>Описание дела</label>
-            <input type="text" name="description" value="">
-            <label>Год срока:</label>
-            <input type="text" name="yearTask" value="">
-            <label>Месяц срока:</label>
-            <input type="text" name="monthTask" value="">
-            <label>Месяц срока:</label>
-            <input type="text" name="dayTask" value="">
+            <h2>Добавление человека</h2>
+            <label>Имя</label>
+            <input type="text" name="name" value="">
+            <label>Сообщение</label>
+            <input type="text" name="message" value="">
             <hr>
-            <button id="save-task">Сохранить</button>
+            <button id="save-people">Сохранить</button>
         </form>
     </div>
-    <div id="task-put-form">
+    <div id="people-put-form">
         <form>
         </form>
     </div>
-    <div class="experiment"></div>
-    <h1>Список людей (<span th:text="${personsCount}">0</span>)</h1>
-    <button id="show-add-task-form">Добавить дело</button>
+    <h1>Список людей (<span th:text="${peoplesCount}">0</span>)</h1>
+    <button id="show-add-people-form">Добавить человека</button>
     <br><br>
-    <div id="task-list">
-        <div th:each="person : ${persons}">
-            <a href="#" class="task-link" th:attr="data-id=${person.id}" th:text="${person.name}"></a>
+    <div id="people-list">
+        <div th:each="people : ${peoples}">
+            <a href="#" class="people-link" th:attr="data-id=${people.id}" th:text="${people.name}"></a>
         </div>
     </div>
     <p>Версия сайта:</p>

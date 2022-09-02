@@ -2,110 +2,90 @@ $(function(){
 
     var numberClick = 0;
 
-    $('#test_bottom').click(function(){
-            let generateText = $('<a class="textFromTestBottom">Вы нажали тестовую кнопку</a>');
-            let inBox1 = $('.experiment');
-            inBox1.append(generateText);
-            $('#task-put-form').css({display: 'flex'});
-        });
-
-    const appendTask = function(data){
-        var taskCode = '<a href="#" class="task-link" data-id="' +
+    const appendPeople = function(data){
+        var peopleCode = '<a href="#" class="people-link" data-id="' +
             data.id + '">' + data.name + '</a><br>';
-        $('#task-list')
-            .append('<div>' + taskCode + '</div>');
+        $('#people-list')
+            .append('<div>' + peopleCode + '</div>');
     };
 
-    //Loading Tasks on load page
-//    $.get('/tasks/', function(response)
+    //Loading peoples on load page
+//    $.get('/peoples/', function(response)
 //    {
 //        for(i in response) {
-//            appendTask(response[i]);
+//            appendPeople(response[i]);
 //        }
 //    });
 
-    //Show adding Task form
-    $('#show-add-task-form').click(function(){
-        $('#task-form').css({display: 'flex'});
+    //Show adding people form
+    $('#show-add-people-form').click(function(){
+        $('#people-form').css({display: 'flex'});
     });
 
-//Closing adding Task form
-    $('#task-form').click(function(event){
+//Closing adding people form
+    $('#people-form').click(function(event){
         if(event.target === this) {
             $(this).css({display: 'none'});
         }
     });
 
-    $('#task-put-form').click(function(event){
+    $('#people-put-form').click(function(event){
         if(event.target === this) {
             $(this).css({display: 'none'});
             location.reload();
         }
     });
 
-    //Getting Task
-    $(document).on('click', '.task-link', function(){
+    //Getting people
+    $(document).on('click', '.people-link', function(){
         var link = $(this);
-        var taskId = link.data('id');
+        var peopleId = link.data('id');
 
         $.ajax({
             method: "GET",
-            url: '/tasks/' + taskId,
+            url: '/peoples/' + peopleId,
             success: function(response)
             {
 
-//                if(numberClick != taskId) {
-                    var code = '<div class="task-one"><span>Плановый год завершения:' + response.yearTask +
-                    '</span><p></p><button id="put-task" data-id="' + taskId +
-                    '">Редактировать</button><p></p><button id="dell-task" data-id="' + taskId +
+                    var code = '<div class="people-one"><span>Сообщение:' + response.message +
+                    '</span><p></p><button id="put-people" data-id="' + peopleId +
+                    '">Редактировать</button><p></p><button id="dell-people" data-id="' + peopleId +
                     '">Удалить</button></div>';
 
                     link.parent().append(code);
                     numberClick = link.data('id');
-//                }
-                 $('#put-task').click(function(){
-//                 getTaskElement($('#put-task').data('id'));
-//                 $('body').append($('<a> Id' + $('#put-task').data('id') + '</a>'));
-                   $('#task-put-form > form').html('');
-                   let fillingTaskPutForm = '<h2>Редактирование дела</h2>';
-                   fillingTaskPutForm += '<label>Название дела </label>';
-                   fillingTaskPutForm += '<input type="text" name="header" value="' + response.header +
+                 $('#put-people').click(function(){
+                   $('#people-put-form > form').html('');
+                   let fillingPeoplePutForm = '<h2>Редактирование данных о человеке</h2>';
+                   fillingPeoplePutForm += '<label>Имя человека </label>';
+                   fillingPeoplePutForm += '<input type="text" name="name" value="' + response.name +
                    '">';
-                   fillingTaskPutForm += '<label>Описание дела</label>';
-                   fillingTaskPutForm += '<input type="text" name="description" value="' + response
-                   .description + '">';
-                   fillingTaskPutForm += '<label>Год срока:</label>';
-                   fillingTaskPutForm += '<input type="text" name="yearTask" value="' + response.yearTask
-                   + '">';
-                   fillingTaskPutForm += '<label>Месяц срока:</label>';
-                   fillingTaskPutForm += '<input type="text" name="monthTask" value="' + response
-                   .monthTask + '">';
-                   fillingTaskPutForm += '<label>День срока:</label>';
-                   fillingTaskPutForm += '<input type="text" name="dayTask" value="' + response.dayTask +
-                   '">';
-                   fillingTaskPutForm += '<hr><button id="put-task-save" data-id="' + taskId +
+                   fillingPeoplePutForm += '<label>Сообщение</label>';
+                   fillingPeoplePutForm += '<input type="text" name="message" value="' + response
+                   .message + '">';
+                   fillingPeoplePutForm += '<hr><button id="put-people-save" data-id="' + peopleId +
                    '">Редактировать</button>';
-                   $('#task-put-form > form').append(fillingTaskPutForm);
-                   $('#task-put-form').css({display: 'flex'});
-                   $('#put-task-save').click(function()
+                   $('#people-put-form > form').append(fillingPeoplePutForm);
+                   $('#people-put-form').css({display: 'flex'});
+                   $('#put-people-save').click(function()
                        {
-                           var data = $('#task-put-form form').serialize();
+                           var data = $('#people-put-form form').serialize();
                            var link = $(this);
-                           var taskId = link.data('id');
+                           var peopleId = link.data('id');
                            $.ajax({
                                method: "PUT",
-                               url: '/tasks/' + taskId,
+                               url: '/peoples/' + peopleId,
                                data: data,
                                success: function(response)
                                {
-                                   $('#task-put-form').css('display', 'none');
-                                   var task = {};
-                                   task.id = response;
-                                   var dataArray = $('#task-put-form form').serializeArray();
+                                   $('#people-put-form').css('display', 'none');
+                                   var people = {};
+                                   people.id = response;
+                                   var dataArray = $('#people-put-form form').serializeArray();
                                    for(i in dataArray) {
-                                       Task[dataArray[i]['header']] = dataArray[i]['value'];
+                                       people[dataArray[i]['header']] = dataArray[i]['value'];
                                    }
-                                   appendTask(task);
+                                   appendPeople(people);
                                }
                            });
                            location.reload();
@@ -113,12 +93,12 @@ $(function(){
                        });
                 });
 
-                $('#dell-task').click(function(){
+                $('#dell-people').click(function(){
                    var link = $(this);
-                   var taskId = link.data('id');
+                   var peopleId = link.data('id');
                    $.ajax({
                        method: "DELETE",
-                       url: '/tasks/' + taskId,
+                       url: '/peoples/' + peopleId,
                    });
                    location.reload();
                    return false;
@@ -127,7 +107,7 @@ $(function(){
             error: function(response)
             {
                 if(response.status == 404) {
-                    alert('Дело не найдено!');
+                    alert('Человек не найден!');
                 }
             }
         });
@@ -136,24 +116,24 @@ $(function(){
 
 
 
-    //Adding Task
-    $('#save-task').click(function()
+    //Adding People
+    $('#save-people').click(function()
     {
-        var data = $('#task-form form').serialize();
+        var data = $('#people-form form').serialize();
         $.ajax({
             method: "POST",
-            url: '/tasks/',
+            url: '/peoples/',
             data: data,
             success: function(response)
             {
-                $('#task-form').css('display', 'none');
-                var task = {};
-                task.id = response;
-                var dataArray = $('#task-form form').serializeArray();
+                $('#people-form').css('display', 'none');
+                var people = {};
+                people.id = response;
+                var dataArray = $('#people-form form').serializeArray();
                 for(i in dataArray) {
-                    Task[dataArray[i]['header']] = dataArray[i]['value'];
+                    people[dataArray[i]['header']] = dataArray[i]['value'];
                 }
-                appendTask(task);
+                appendPeople(people);
             }
         });
         return false;
