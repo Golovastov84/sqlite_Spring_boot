@@ -23,7 +23,7 @@ public class PeopleController {
         this.peopleRepository = peopleRepository;
     }
 
-    @GetMapping("/peoples")
+    @GetMapping("/peoples/")
     public List<People> ListPeople() {
         Iterable<People> peopleIterable = peopleRepository.findAll();
 
@@ -34,7 +34,8 @@ public class PeopleController {
         return peoples;
     }
 
-    @PostMapping("/peoples")
+    @PostMapping("/peoples/")
+    @ResponseBody
     public int addPeople(People people) {
         if (peopleRepository.count() == 0) {
 //            System.out.println(people.getId());
@@ -67,6 +68,7 @@ public class PeopleController {
     }
 
     @PutMapping("/peoples/{id}")
+    @ResponseBody
     public ResponseEntity<?> putPeopleId(People newPeople, @PathVariable int id) {
         Optional<People> optionalPeople = peopleRepository.findById(id);
         if (!optionalPeople.isPresent()) {
@@ -78,7 +80,7 @@ public class PeopleController {
         return new ResponseEntity<>(newPeople, HttpStatus.OK);
     }
 
-    @DeleteMapping("/peoples")
+    @DeleteMapping("/peoples/")
     public ResponseEntity dellAllPeoples() {
         if (peopleRepository.count() == 0) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The list is already empty.");
