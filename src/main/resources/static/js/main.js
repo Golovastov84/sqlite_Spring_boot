@@ -85,10 +85,10 @@ $(function(){
                                    for(i in dataArray) {
                                        people[dataArray[i]['header']] = dataArray[i]['value'];
                                    }
+                                location.reload();
                                    appendPeople(people);
                                }
                            });
-                           location.reload();
                            return false;
                        });
                 });
@@ -110,7 +110,9 @@ $(function(){
                     alert('Человек не найден!');
                 }
             }
+
         });
+
         return false;
     });
 

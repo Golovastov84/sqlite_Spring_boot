@@ -17,7 +17,7 @@ public class DefaultController {
     PeopleRepository peopleRepository;
 
     @Value("${someParameter}")
-    private Integer someParameter;
+    private int someParameter;
 
     @RequestMapping("/")
     public String index(Model model){
